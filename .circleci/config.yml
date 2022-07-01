@@ -44,6 +44,9 @@ jobs:
           name: Install tar utility
           command: |
             yum install -y tar gzip
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+            
       - run:
           name: CHECK VERSIONS
           command: |
@@ -51,6 +54,9 @@ jobs:
             ls -l /usr/local/bin/
             pwd
             ls -l
+            whoami
+            kubectl version --client
+            
 workflows:
   default:
     jobs:
