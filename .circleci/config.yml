@@ -33,7 +33,7 @@ jobs:
           name: run lint
           command: |
             . venv/bin/activate
-            make lint
+            make lint 
   deploy-infrastructure:
     docker:
       - image: amazon/aws-cli
@@ -44,7 +44,7 @@ jobs:
           command: |
             yum install -y tar gzip
       - run:
-          name: Ensure back-end infrastructure exists
+          name: CHECK VERSIONS
           command: |
             echo "checking versions on this image"
             echo docker --version
@@ -52,3 +52,8 @@ jobs:
             echo eksctl version
             pwd
             ls -l
+workflows:
+  default:
+    jobs:
+      - build
+      - deploy-infrastructure
