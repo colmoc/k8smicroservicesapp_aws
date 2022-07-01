@@ -48,9 +48,7 @@ jobs:
           name: CHECK VERSIONS
           command: |
             echo "checking versions on this image"
-            docker --version
-            kubectl version
-            eksctl version
+            ls -l /usr/local/bin/
             pwd
             ls -l
 workflows:
