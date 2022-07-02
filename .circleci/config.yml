@@ -58,8 +58,13 @@ jobs:
             whoami
             kubectl version --client
             eksctl version
+            echo "Current cluster looks like this"
             eksctl get cluster --name house-demo --region=us-east-2
-            kubectl get nodes  
+            echo "deploy a new cluster and deploy new container"
+            eksctl create cluster --name house-cap --nodes=2 --node-type t3.medium
+            eksctl utils describe-stacks --region=us-west-2 --cluster=house-cap
+            eksctl get cluster --name house-demo --region=us-west-2
+            kubectl get nodes
             
 workflows:
   default:
