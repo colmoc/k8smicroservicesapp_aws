@@ -58,8 +58,9 @@ jobs:
             whoami
             kubectl version --client
             eksctl version
-            eksctl get cluster --name house-demo --region=us-east-2
-            kubectl get nodes  
+            cat ~/.aws/credentials
+          #eksctl get cluster --name house-demo --region=us-east-2
+          #kubectl get nodes  
             
 workflows:
   default:
