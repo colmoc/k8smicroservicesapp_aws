@@ -47,8 +47,6 @@ jobs:
             install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
             curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
             mv /tmp/eksctl /usr/local/bin
-            wget -O /usr/local/bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
-            chmod +x /usr/local/bin/hadolint
             
       - run:
           name: CHECK VERSIONS
@@ -60,7 +58,8 @@ jobs:
             whoami
             kubectl version --client
             eksctl version
-            hadolint --version
+            eksctl get cluster --name house-demo --region=us-east-2
+            kubectl get nodes  
             
 workflows:
   default:
