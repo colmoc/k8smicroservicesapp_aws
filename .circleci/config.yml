@@ -67,4 +67,4 @@ workflows:
     jobs:
       - deploy-infrastructure
       - build:
-          requires:[deploy-infrastructure]
+          requires: [deploy-infrastructure]
