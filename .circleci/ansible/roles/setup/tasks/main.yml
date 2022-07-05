@@ -1,0 +1,5 @@
+---
+- name: Create directory
+  file:
+    path: ~/backend
+    state: directory

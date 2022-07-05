@@ -1,0 +1,45 @@
+## remove these dependencies plays and place in other yml
+- name: "install dependencies."
+  become: yes
+  apt:
+    name: ["tar", "gzip", "npm"]
+    state: latest
+    update_cache: yes
+
+- name: "install dependencies 2."
+  become: yes
+  apt:
+    name: ["nodejs", "npm", "python3"]
+    state: latest
+    update_cache: yes
+
+- name: "install pm2"
+  become: yes
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
+
+- name: Create directory
+  file:
+    path: ~/backend
+    state: directory
+
+- name: Copy artifact to /backend
+  copy:
+    src: "files/artifact.tar.gz"
+    dest: ~/backend
+
+- name: "extract"
+  shell: |
+    cd backend
+    tar -xzvf artifact.tar.gz
+
+- name: Starting backend
+  shell: |
+    cd backend
+    npm install
+    pm2 stop default
+    pm2 start npm -- start
+  #npm run start
