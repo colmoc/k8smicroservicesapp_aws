@@ -5,6 +5,31 @@
 version: 2.1
 
 jobs:
+  write-inventory:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - run: pwd
+      - run: ls -la
+      - checkout
+      - run: ls -la
+      - run:
+          name: Install tar utility
+          command: |
+            yum install -y tar gzip
+      - run:
+          name: Add back-end ip to ansible inventory
+          command: |
+            echo "[web]" > .circleci/ansible/inventory.txt
+            aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters "Name=tag:Name,Values=aws-cloud9-devops-27ebb1e66f89421e8f580ac25d1dbee2" \
+              --output text >> .circleci/ansible/inventory.txt
+      - run: cat .circleci/ansible/inventory.txt
+      - persist_to_workspace:
+          root: .circleci/ansible/
+          paths:
+            - inventory.txt
   build:
     working_directory: ~/repo
     docker:
@@ -76,8 +101,8 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints: ["fa:08:89:02:8b:4b:c0:5f:5f:ff:b7:7c:ad:99:82:61"]
-      #- attach_workspace:
-      #    at: /tmp
+      - attach_workspace:
+          at: /tmp
       - run:
           name: Install dependencies
           command: |
@@ -91,6 +116,7 @@ jobs:
 workflows:
   default:
     jobs:
+      - write-inventory
       - deploy-infrastructure
       - build:
           requires: [deploy-infrastructure]
