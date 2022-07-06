@@ -32,7 +32,7 @@ jobs:
           paths:
             - inventory.txt
       - attach_workspace:
-          at: /tmp
+          at: /tmp/
       - run:
           name: TEST ATTACH
           command: |
