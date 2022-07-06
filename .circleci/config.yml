@@ -28,16 +28,16 @@ jobs:
       - run: cat .circleci/ansible/inventory.txt
       - run: ls -l /tmp
       - persist_to_workspace:
-          root: .circleci/ansible/
+          root: ~/
           paths:
             - inventory.txt
       - attach_workspace:
-          at: /tmp/
+          at: ~/
       - run:
           name: TEST ATTACH
           command: |
-            ls -l /tmp
-            cat /tmp/inventory.txt
+            ls -l ~/
+            cat ~/inventory.txt
   build:
     working_directory: ~/repo
     docker:
