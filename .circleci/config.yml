@@ -32,12 +32,12 @@ jobs:
           paths:
             - inventory.txt
       - attach_workspace:
-          at: ~/
+          at: /tmp
       - run:
           name: TEST ATTACH
           command: |
-            ls -l ~/
-            cat ~/inventory.txt
+            ls -l .tmp
+            cat /tmp/inventory.txt
   build:
     working_directory: ~/repo
     docker:
