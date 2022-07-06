@@ -26,10 +26,18 @@ jobs:
               --filters "Name=tag:Name,Values=aws-cloud9-devops-27ebb1e66f89421e8f580ac25d1dbee2" \
               --output text >> .circleci/ansible/inventory.txt
       - run: cat .circleci/ansible/inventory.txt
+      - run: ls -l /tmp
       - persist_to_workspace:
           root: .circleci/ansible/
           paths:
             - inventory.txt
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: TEST ATTACH
+          command: |
+            ls -l /tmp
+            cat /tmp/inventory.txt
   build:
     working_directory: ~/repo
     docker:
@@ -118,8 +126,8 @@ workflows:
   default:
     jobs:
       - write-inventory
-      - deploy-infrastructure
-      - build:
-          requires: [deploy-infrastructure]
-      - configure-infrastructure:
-          requires: [build]
+      #- deploy-infrastructure
+      #- build:
+      #    requires: [deploy-infrastructure]
+      #- configure-infrastructure:
+      #    requires: [build]
