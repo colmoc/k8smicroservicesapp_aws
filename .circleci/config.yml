@@ -109,12 +109,37 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints: ["fa:08:89:02:8b:4b:c0:5f:5f:ff:b7:7c:ad:99:82:61"]
-      - attach_workspace:
-          at: ~/
+      - run:
+          name: Install tar gzip ansible utility
+          command: |
+            apk add --update ansible
+            apk add --update tar
+            apk add --update gzip
+            apk add --no-cache \
+                python3 \
+                py3-pip \
+            && pip3 install --upgrade pip \
+            && pip3 install --no-cache-dir \
+                awscli \
+            && rm -rf /var/cache/apk/*
+      - run:
+          name: Add back-end ip to ansible inventory
+          command: |
+            echo "[web]" > ~/inventory.txt
+            aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters "Name=tag:Name,Values=aws-cloud9-devops-27ebb1e66f89421e8f580ac25d1dbee2" \
+              --output text >> ~/inventory.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - inventory.txt
       - run:
           name: Install dependencies
           command: |
             apk add --update ansible
+      - attach_workspace:
+          at: ~/
       - run:
           name: Configure server using Ansible 'configure-server.yml'
           command: |
@@ -125,7 +150,6 @@ jobs:
 workflows:
   default:
     jobs:
-      - write-inventory
       - deploy-infrastructure
       - build:
           requires: [deploy-infrastructure]
