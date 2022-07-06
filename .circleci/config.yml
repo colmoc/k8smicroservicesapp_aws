@@ -36,7 +36,7 @@ jobs:
       - run:
           name: TEST ATTACH
           command: |
-            ls -l .tmp
+            ls -l /tmp
             cat /tmp/inventory.txt
   build:
     working_directory: ~/repo
