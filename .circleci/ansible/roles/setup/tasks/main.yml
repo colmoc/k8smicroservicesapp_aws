@@ -17,10 +17,10 @@
 - name: "start k8 app"
   shell: |
     kubectl get pod > /home/ec2-user/testdir/testfile.txt 
-    kubectl port-forward pod/python-housek8s-67b6556c7c-ghtwx --address 0.0.0.0 8000:80
+    kubectl port-forward pod/python-housek8s-67b6556c7c-8s746 --address 0.0.0.0 8000:80
     pwd
 
 - name: "get results"
   shell: |
     cd /home/ec2-user/environment/k8smicroservicesapp_aws
-    ./make_prediction.sh > /home/ec2-user/testdir/testfile.txt 
+    ./make_prediction.sh >> /home/ec2-user/testdir/testfile.txt
