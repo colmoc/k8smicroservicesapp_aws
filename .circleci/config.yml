@@ -32,12 +32,12 @@ jobs:
           paths:
             - inventory.txt
       - attach_workspace:
-          at: /tmp
+          at: ~/
       - run:
           name: TEST ATTACH
           command: |
-            ls -l /tmp
-            cat /tmp/inventory.txt
+            ls -l ~/
+            cat ~/inventory.txt
   build:
     working_directory: ~/repo
     docker:
@@ -110,7 +110,7 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["fa:08:89:02:8b:4b:c0:5f:5f:ff:b7:7c:ad:99:82:61"]
       - attach_workspace:
-          at: /tmp
+          at: ~/
       - run:
           name: Install dependencies
           command: |
@@ -118,16 +118,16 @@ jobs:
       - run:
           name: Configure server using Ansible 'configure-server.yml'
           command: |
-            cat /tmp/inventory.txt
+            cat ~/inventory.txt
             cd .circleci/ansible
-            ansible-playbook -i /tmp/inventory.txt configure-server.yml
+            ansible-playbook -i ~/inventory.txt configure-server.yml
             
 workflows:
   default:
     jobs:
       - write-inventory
-      #- deploy-infrastructure
-      #- build:
-      #    requires: [deploy-infrastructure]
-      #- configure-infrastructure:
-      #    requires: [build]
+      - deploy-infrastructure
+      - build:
+          requires: [deploy-infrastructure]
+      - configure-infrastructure:
+          requires: [build]
