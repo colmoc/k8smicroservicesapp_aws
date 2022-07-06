@@ -3,3 +3,11 @@
   file:
     path: ~/backend
     state: directory
+    
+- name: "testing"
+  shell: |
+    ls -l
+    pwd
+    mkdir testdir
+    cd testdir
+    touch testfile.txt
