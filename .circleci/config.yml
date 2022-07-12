@@ -23,7 +23,7 @@ jobs:
             echo "[web]" > ~/inventory.txt
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:Name,Values=aws-cloud9-devops-27ebb1e66f89421e8f580ac25d1dbee2" \
+              --filters "Name=tag:Name,Values=aws-cloud9-myDevops-4c83fde84ae342bab3bed24c0cb7e4a3" \
               --output text >> ~/inventory.txt
       - run: cat .circleci/ansible/inventory.txt
       - run: ls -l /tmp
@@ -108,7 +108,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["fa:08:89:02:8b:4b:c0:5f:5f:ff:b7:7c:ad:99:82:61"]
+          fingerprints: ["49:94:01:d8:4a:94:6e:b5:48:3e:2a:a1:cf:f7:67:ae"]
       - run:
           name: Install tar gzip ansible utility
           command: |

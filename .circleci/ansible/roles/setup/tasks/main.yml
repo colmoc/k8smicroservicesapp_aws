@@ -17,10 +17,11 @@
 - name: "start k8 app"
   shell: |
     su ec2-user
-    kubectl get pods
-    kubectl port-forward pod/python-housek8s-67b6556c7c-8s746 --address 0.0.0.0 8000:80
-    cd /home/ec2-user/environment/k8smicroservicesapp_aws
-    ./make_prediction.sh >> /home/ec2-user/testdir/testfile.txt
+    kubectl get svc
+    kubectl get namespace
+    kubectl get nodes
+    /home/ec2-user/environment/k8smicroservicesapp_aws/make_prediction.prod.sh > /tmp/test3
+    cat /tmp/test3
 
 #- name: "get results"
 #  shell: |
