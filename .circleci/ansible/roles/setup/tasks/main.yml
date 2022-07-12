@@ -12,11 +12,11 @@
     mkdir testdir
     cd testdir
     touch testfile.txt
+    whoami > testfile.txt
     chmod 777 testfile.txt
 
 - name: "start k8 app"
   shell: |
-    su ec2-user
     kubectl get svc
     kubectl get namespace
     kubectl get nodes
