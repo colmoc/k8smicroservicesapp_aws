@@ -92,8 +92,8 @@ jobs:
             kubectl version --client
             eksctl version
             echo "Current cluster looks like this"
-            eksctl get cluster --name elcapo--region=us-east-2
-            echo "deploy a new cluster and deploy new container to it..."
+          #  eksctl get cluster --name elcapo--region=us-east-2
+          #  echo "deploy a new cluster and deploy new container to it..."
           # eksctl create cluster --name house-cap --nodes=2 --node-type t3.medium
           # echo "give me the progress...."
           # eksctl utils describe-stacks --region=us-west-2 --cluster=house-cap
