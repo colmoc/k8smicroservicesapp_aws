@@ -92,7 +92,7 @@ jobs:
             kubectl version --client
             eksctl version
             echo "Current cluster looks like this"
-            eksctl get cluster --name house-demo --region=us-east-2
+            eksctl get cluster --name elcapo--region=us-east-2
             echo "deploy a new cluster and deploy new container to it..."
           # eksctl create cluster --name house-cap --nodes=2 --node-type t3.medium
           # echo "give me the progress...."
@@ -101,6 +101,7 @@ jobs:
           # eksctl get cluster --name house-cap --region=us-west-2
           # echo "use kubectl to interact"
           # kubectl get nodes
+          # testing
             
   configure-infrastructure:
     docker:
@@ -128,7 +129,7 @@ jobs:
             echo "[web]" > ~/inventory.txt
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:Name,Values=aws-cloud9-devops-27ebb1e66f89421e8f580ac25d1dbee2" \
+              --filters "Name=tag:Name,Values=aws-cloud9-myDevops-4c83fde84ae342bab3bed24c0cb7e4a3" \
               --output text >> ~/inventory.txt
       - persist_to_workspace:
           root: ~/
