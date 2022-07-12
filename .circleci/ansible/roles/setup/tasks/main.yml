@@ -13,7 +13,6 @@
     cd testdir
     touch testfile.txt
     whoami > testfile.txt
-    chmod 777 testfile.txt
 
 - name: "start k8 app"
   shell: |
