@@ -18,4 +18,4 @@ kubectl get deployment
 
 # Step 4:
 # Forward the container port to a host
-kubectl port-forward pod/python-housek8s-55dfc4bfff-9ccv8 --address 0.0.0.0 8000:80
+kubectl port-forward pod/python-housek8s-67b6556c7c-qftqt  --address 0.0.0.0 8000:80

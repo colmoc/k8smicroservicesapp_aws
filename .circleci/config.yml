@@ -101,7 +101,8 @@ jobs:
           # eksctl get cluster --name house-cap --region=us-west-2
           # echo "use kubectl to interact"
           # kubectl get nodes
-          # testing
+          # testing.....
+          
             
   configure-infrastructure:
     docker:

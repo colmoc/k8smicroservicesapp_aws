@@ -23,6 +23,7 @@
     /home/ec2-user/environment/k8smicroservicesapp_aws/make_prediction.prod.sh > /tmp/test3
     cat /tmp/test3
     
+    
 
 #- name: "get results"
 #  shell: |
