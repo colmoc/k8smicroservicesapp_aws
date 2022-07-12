@@ -132,7 +132,7 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:Name,Values=aws-cloud9-myDevops-4c83fde84ae342bab3bed24c0cb7e4a3" \
               --output text >> ~/inventory.txt
-            echo "[web]" > ~/inventory.txt
+            cat ~/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
