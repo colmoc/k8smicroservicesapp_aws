@@ -22,6 +22,11 @@
     kubectl get nodes
     /home/ec2-user/environment/k8smicroservicesapp_aws/make_prediction.prod.sh > /tmp/test3
     cat /tmp/test3
+    kubectl create namespace test
+    dockerpath=colmoconchuir/houseimg:v1.0.1
+    kubectl create deployment python-housek8s-test --image=$dockerpath -n=test
+    kubectl expose deployment python-housek8s-test --type=LoadBalancer --port=8000 --target-port=80 -n=test
+    kubectl get svc -n=test > /tmp/test4.txt
     
     
 
