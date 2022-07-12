@@ -153,8 +153,8 @@ jobs:
 workflows:
   default:
     jobs:
-      - deploy-infrastructure
-      - build:
-          requires: [deploy-infrastructure]
-      - configure-infrastructure:
-          requires: [build]
+     # - deploy-infrastructure
+     # - build:
+    #      requires: [deploy-infrastructure]
+      - configure-infrastructure
+          #requires: [build]
